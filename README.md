@@ -1,14 +1,45 @@
-# node-librarycloud-api
-A simple way to consume the LibraryCloud api @http://librarycloud.harvard.edu/ using node.
+node-librarycloud-api
+=====================
+A simple way to consume the LibraryCloud api at http://librarycloud.harvard.edu
 
 ## Installation
 
-  npm install node-librarycloud-api
+  'npm install node-librarycloud-api'
 
 ## Usage
-  The API is not intended to be used to acquire Harvard data sets in their entirety. Not only is that an inefficient way to gather the data, it can also have an adverse affect on the performance of the API for others. Note also that the data sets are available for bulk download here: @http://openmetadata.lib.harvard.edu/bibdata.
 
-  var libcloud = require('node-librarycloud-api');
+*Currently, only the Item API is available.
+
+*The API is not intended to be used to acquire Harvard data sets in their entirety. Not only is that an inefficient way to gather the data, it can also have an adverse affect on the performance of the API for others. Note also that the data sets are available for bulk download here: http://openmetadata.lib.harvard.edu/bibdata
+
+'''javascript
+// Initialize
+var libcloud = require('node-librarycloud-api');
+'''
+
+'''javascript
+// Create the search criteria
+var search = {
+  filter: ["keyword:finance"],
+  limit: 15,
+  start: 20
+}
+'''
+
+'''javascript
+// Search
+libcloud.item.search(search,function(res){
+  console.log(res)
+})
+'''
+
+'''javascript
+// Get a single record based on id
+libcloud.item.get(123456,function(res)
+   {
+     console.log(res)
+   })
+'''
 
 ## Tests
 
@@ -16,6 +47,7 @@ A simple way to consume the LibraryCloud api @http://librarycloud.harvard.edu/ u
 
 ## Contributing
 
+  If you find any flaws or would like to add features, feel free to merge your branch!
 
 ## Release History
 
