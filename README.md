@@ -52,6 +52,8 @@ libcloud.item.get(123456,function(res)
 ## Release History
 
 * 0.0.1 Initial release
+* 0.0.2 Getting used to SemVer
+* 0.0.3 Updated README for http://www.npmjs.com/package/node-librarycloud-api
 
 ## The MIT License (MIT)
 
