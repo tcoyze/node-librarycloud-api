@@ -1,6 +1,6 @@
 {
   "name": "node-librarycloud-api",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "This is a node.js consumer for the library cloud api.",
   "main": "app.js",
   "scripts": {
