@@ -23,21 +23,35 @@
 */
 
 var libcloud = require("./app.js") // You will use: require("node-librarycloud-api")
-
 // Create the search criteria
 var search = {
-  filter: ["keyword:finance"],
+  q: "math",
   limit: 15,
   start: 20
 }
 
 // Search
-libcloud.item.search(search,function(res){
-  console.log(res)
-
+libcloud.item.search(search,function(err, res){
+  console.log(res.items[0]);
+  console.log(res.items[0].mods.recordInfo)
   // Take the first record from the search and GET it
-  libcloud.item.get(res.docs[0].id,function(res)
-   {
-     console.log(res)
-   })
+  // libcloud.item.get(ID_GOES_HERE,function(err, res)
+  //  {
+  //    console.log("Item...")
+  //    console.log(res);
+  //    console.log(err);
+  //    cb();
+  //  })
+})
+
+libcloud.collections.search(search,function(err, res){
+  console.log(res);
+  // Take the first record from the search and GET it
+  // libcloud.collections.get(ID_GOES_HERE,function(err, res)
+  //  {
+  //    console.log("Collections...")
+  //    console.log(res);
+  //    console.log(err);
+  //    cb();
+  //  })
 })

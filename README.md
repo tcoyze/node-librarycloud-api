@@ -1,6 +1,6 @@
 node-librarycloud-api
 =====================
-A simple way to consume the LibraryCloud api at http://librarycloud.harvard.edu
+A simple way to consume the LibraryCloud api at http://library.harvard.edu/librarycloud
 
 ## Installation
 
@@ -8,9 +8,7 @@ A simple way to consume the LibraryCloud api at http://librarycloud.harvard.edu
 
 ## Usage
 
-*Currently, only the Item API is available.
-
-*The API is not intended to be used to acquire Harvard data sets in their entirety. Not only is that an inefficient way to gather the data, it can also have an adverse affect on the performance of the API for others. Note also that the data sets are available for bulk download here: http://openmetadata.lib.harvard.edu/bibdata
+* The API is not intended to be used to acquire Harvard data sets in their entirety. Not only is that an inefficient way to gather the data, it can also have an adverse affect on the performance of the API for others. Note also that the data sets are available for bulk download here: http://openmetadata.lib.harvard.edu/bibdata
 
 ```javascript
 // Initialize
@@ -20,7 +18,8 @@ var libcloud = require('node-librarycloud-api');
 ```javascript
 // Create the search criteria
 var search = {
-  filter: ["keyword:finance"],
+  q: "optimizations in finance"
+  facets: ["name", "resourceType"],
   limit: 15,
   start: 20
 }
@@ -28,32 +27,41 @@ var search = {
 
 ```javascript
 // Search
-libcloud.item.search(search,function(res){
+libcloud.item.search(search,function(err, res){
+  console.log(res)
+})
+
+libcloud.collections.search(search,function(err, res){
   console.log(res)
 })
 ```
 
 ```javascript
 // Get a single record based on id
-libcloud.item.get(123456,function(res)
-   {
-     console.log(res)
-   })
+libcloud.item.get(123456,function(err, res)
+ {
+   console.log(res)
+ })
+
+libcloud.collections.get(123456,function(err, res)
+{
+  console.log(res)
+})
 ```
-
-## Tests
-
-  npm test
+## TODO
+* Add POST to Collections with API token
+* Add DELETE to Collections with API token
 
 ## Contributing
 
-  If you find any flaws or would like to add features, feel free to merge your branch!
+  If you find any flaws or would like to add features, feel free to open an issue.
 
 ## Release History
 
 * 0.0.1 Initial release
 * 0.0.2 Getting used to SemVer
 * 0.0.3 Updated README for http://www.npmjs.com/package/node-librarycloud-api
+* 0.1.0 Updated wrapper to include new updates to the base url and collections endpoint
 
 ## The MIT License (MIT)
 

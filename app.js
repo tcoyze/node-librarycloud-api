@@ -25,8 +25,8 @@
   var http = require('http');
   var query = require('querystring');
 
-  var host = "librarycloud.harvard.edu"
-  var basePath = "/v1/api"
+  var host = "api.lib.harvard.edu";
+  var basePath = "/v2";
 
   var libcloud = {
     item: {
@@ -42,15 +42,15 @@
           JSON result
       */
       get: function(id, callback) {
-        var qstring = ""
-        var subpath = basePath + "/item/" + id
+        var qstring = "";
+        var subpath = basePath + "/items/" + id;
 
         var options= {
             host: host,
             port: 80,
             path: subpath,
             method: "GET"
-        }
+        };
 
         request(options, callback)
       },
@@ -66,8 +66,65 @@
           Json results
       */
       search: function(params, callback) {
-        var qstring = ""
-        var subpath = basePath + "/item"
+        var qstring = "";
+        var subpath = basePath + "/items";
+
+        if( params!= undefined && params != {} )
+        {
+          qstring = query.stringify(params);
+          subpath += "?" + qstring;
+        }
+
+        var options= {
+            host: host,
+            port: 80,
+            path: subpath,
+            method: "GET"
+        };
+
+        request(options, callback)
+      }
+    },
+
+    collections:{
+      /*
+        libcloud.collections.get
+
+        Description:
+          This will obtain a single collection
+        Parameters:
+          string:   ID
+          function: Callback
+        Return:
+          JSON result
+      */
+      get: function(id, callback) {
+        var qstring = "";
+        var subpath = basePath + "/collections/" + id;
+
+        var options= {
+            host: host,
+            port: 80,
+            path: subpath,
+            method: "GET"
+        };
+
+        request(options, callback)
+      },
+      /*
+        libcloud.collections.search
+
+        Description:
+          Search for collections based on given criteria (q, filters, limit, start, etc)
+        Parameters:
+          Json Object: params
+          function:    callback
+        Return:
+          Json results
+      */
+      search: function(params, callback) {
+        var qstring = "";
+        var subpath = basePath + "/collections";
 
         if( params!= undefined && params != {} )
         {
@@ -80,7 +137,7 @@
             port: 80,
             path: subpath,
             method: "GET"
-        }
+        };
 
         request(options, callback)
       }
@@ -89,8 +146,14 @@
 
   var request = function(options, callback)
   {
+    options.headers = {
+                        "Accept": "application/json"
+                      };
     http.request(options, function(res){
       var body = '';
+      var json;
+      var error;
+
       res.setEncoding('utf8');
 
       res.on('data', function(chunk) {
@@ -98,11 +161,15 @@
       });
 
       res.on('end', function() {
-        var result;
-        json = JSON.parse(body);
 
+        try{
+          json = JSON.parse(body);
+        }
+        catch(e){
+          error = e;
+        }
 
-        return callback(json);
+        return callback(error, json);
       });
     }).end()
   }
