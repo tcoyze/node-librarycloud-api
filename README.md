@@ -18,35 +18,33 @@ var libcloud = require('node-librarycloud-api');
 ```javascript
 // Create the search criteria
 var search = {
-  q: "optimizations in finance"
+  q: "optimizations in finance",
   facets: ["name", "resourceType"],
   limit: 15,
   start: 20
-}
+};
 ```
 
 ```javascript
 // Search
 libcloud.item.search(search,function(err, res){
   console.log(res)
-})
+});
 
 libcloud.collections.search(search,function(err, res){
   console.log(res)
-})
+});
 ```
 
 ```javascript
 // Get a single record based on id
-libcloud.item.get(123456,function(err, res)
- {
+libcloud.item.get(123456,function(err, res){
    console.log(res)
- })
+});
 
-libcloud.collections.get(123456,function(err, res)
-{
+libcloud.collections.get(123456,function(err, res){
   console.log(res)
-})
+});
 ```
 ## TODO
 * Add POST to Collections with API token
@@ -59,8 +57,6 @@ libcloud.collections.get(123456,function(err, res)
 ## Release History
 
 * 0.0.1 Initial release
-* 0.0.2 Getting used to SemVer
-* 0.0.3 Updated README for http://www.npmjs.com/package/node-librarycloud-api
 * 0.1.0 Updated wrapper to include new updates to the base url and collections endpoint
 
 ## The MIT License (MIT)
