@@ -28,22 +28,22 @@ var search = {
 ```javascript
 // Search
 libcloud.item.search(search,function(err, res){
-  console.log(res)
+  console.log(res);
 });
 
 libcloud.collections.search(search,function(err, res){
-  console.log(res)
+  console.log(res);
 });
 ```
 
 ```javascript
 // Get a single record based on id
 libcloud.item.get(123456,function(err, res){
-   console.log(res)
+   console.log(res);
 });
 
 libcloud.collections.get(123456,function(err, res){
-  console.log(res)
+  console.log(res);
 });
 ```
 ## TODO
