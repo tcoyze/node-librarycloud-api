@@ -52,7 +52,7 @@
             method: "GET"
         };
 
-        request(options, callback)
+        request(options, callback);
       },
       /*
         libcloud.item.search
@@ -69,8 +69,7 @@
         var qstring = "";
         var subpath = basePath + "/items";
 
-        if( params!= undefined && params != {} )
-        {
+        if( params != undefined && params != {} ){
           qstring = query.stringify(params);
           subpath += "?" + qstring;
         }
@@ -82,7 +81,7 @@
             method: "GET"
         };
 
-        request(options, callback)
+        request(options, callback);
       }
     },
 
@@ -109,7 +108,7 @@
             method: "GET"
         };
 
-        request(options, callback)
+        request(options, callback);
       },
       /*
         libcloud.collections.search
@@ -126,8 +125,7 @@
         var qstring = "";
         var subpath = basePath + "/collections";
 
-        if( params!= undefined && params != {} )
-        {
+        if( params != undefined && params != {} ){
           qstring = query.stringify(params)
           subpath += "?" + qstring
         }
@@ -139,7 +137,7 @@
             method: "GET"
         };
 
-        request(options, callback)
+        request(options, callback);
       }
     }
   };
@@ -147,8 +145,8 @@
   var request = function(options, callback)
   {
     options.headers = {
-                        "Accept": "application/json"
-                      };
+      "Accept": "application/json"
+    };
     http.request(options, function(res){
       var body = '';
       var json;
@@ -171,6 +169,6 @@
 
         return callback(error, json);
       });
-    }).end()
+    }).end();
   }
 module.exports = libcloud;
